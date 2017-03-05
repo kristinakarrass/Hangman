@@ -8,12 +8,16 @@
 	var randomWord, userInput;
 	var secretWord = [];
 	var wordArray = [];
+	var guessedLetters = [];
+	var checkWord = [];
 
 
 // start the game
 	window.onload = function () {
 
-			document.getElementById("gameStart").onclick = function() {
+		document.getElementById("lives").innerHTML = guesses;	
+
+		document.getElementById("gameStart").onclick = function() {
 
 
 				var randomWord = word[Math.floor(Math.random() * word.length)];
@@ -24,6 +28,7 @@
 					if (arrLetter.indexOf(randomWord.charAt(i)) !== -1) {
 						console.log(randomWord.charAt(i))
 						wordArray.push(" " + randomWord.charAt(i) + " ");
+						checkWord.push(randomWord.charAt(i));
 						// var correctLetter = document.createTextNode("__ ");
 						// document.querySelector("#secretWord").appendChild(correctLetter);
 						secretWord.push(" __ ");
@@ -32,26 +37,53 @@
 					else {
 						wordArray.push(randomWord.charAt(i));
 						secretWord.push('\u00A0\u00A0\u00A0');
+						checkWord.push(randomWord.charAt(i));
 						// var notLetter = document.createTextNode('\u00A0\u00A0\u00A0');
 						// document.querySelector("#secretWord").appendChild(notLetter);
 					}
 				} //closes for loop
+
 				document.getElementById('secretWord').innerHTML = secretWord.join("");
-			console.log(secretWord);
-			console.log(wordArray);
+
+									console.log(secretWord);
+									console.log(wordArray);
 
 			document.onkeyup = function() {
+
 				var userGuess = event.key = String.fromCharCode(event.keyCode).toLowerCase();
 				console.log(userGuess);
-				for (var i = 0; i < randomWord.length; i++){
-					if (userGuess === randomWord.charAt(i)) {
-						secretWord[i] = wordArray [i];
+
+					if (checkWord.indexOf(userGuess) !== -1) {
+
+							for (var i = 0; i < randomWord.length; i++){
+
+					// if (guessedLetters.indexOf(userGuess) !== -1) {
+						// alert("You have already used this letter!");
+					// }				
+
+							 		if (userGuess === randomWord.charAt(i)) {
+									secretWord[i] = wordArray [i];
+									guessedLetters.push(userGuess);
+									document.getElementById("usedLetters").innerHTML = guessedLetters;
+								}
+							} //closes second loop
+	
+
+					} // closes if statement
+					else if (guesses === 0) {
+						
 					}
-				} // closes for loop
+					else {
+						guesses--;
+						document.getElementById("lives").innerHTML = guesses;
+					}
+				// } //closes first for loop
+
 				document.getElementById('secretWord').innerHTML = secretWord.join("");
-				} // closes onkeyup function
+
+			} // closes onkeyup function
 			
-			}; //closes function gameStart
+		}; //closes function gameStart
 
 
 	}   // closes onload function

@@ -12,27 +12,3 @@ body {
 	padding: 40px;
 }
 
-h1 {
-	color: red;
-}
-
-#secret-word {
-	margin:0;
-	padding: 0;
-	display: block;
-}
-
-#secret-word li {
-    position: relative;
-    list-style: none;
-    margin: 0;
-    display: inline-block;
-    padding: 0 10px;
-    font-size: 1.6em;
-}
-
-#lives {
-	font-size: 14px;
-	text-align: center;
-	display: block;
-}
