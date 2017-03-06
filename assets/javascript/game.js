@@ -1,6 +1,6 @@
 	// assign variables
 
-	var word = ["sunflower", "peony", "lavender rose", "rose", "lilly", "snapdragon"];
+	var word = ["elephant", "beluga whale", "hippopotamus","grey wolf", "tiger", "kookaburra", "lion", "raccoon", "penguin", "sea lion"];
 
 	var arrLetter = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 
@@ -8,17 +8,39 @@
 	var randomWord, userInput;
 	var secretWord = [];
 	var wordArray = [];
-	var guessedLetters = [];
+	var guessedLetters = [];				//array to compare used letters
+	var guessedLettersDisplay = [];			//array to display used letters 
 	var checkWord = [];
-
+	var wins = 0;
+	var losses = 0;
+	// imgArr[0].src = "../images/elephant.jpg";
+	// imgArr[1].src = "../images/beluga.jpg";
+	// imgArr[2].src = "../images/hippo.jpg";
+	// imgArr[3].src = "../images/greywolf.jpg";	
+	// imgArr[4].src = "../images/tiger.jpg";
+	// imgArr[5].src = "../images/kookaburra.jpg";
+	// imgArr[6].src = "../images/lion.jpg";
+	// imgArr[7].src = "../images/raccoon.jpg";
+	// imgArr[8].src = "../images/penguin.jpg";
+	// imgArr[9].src = "../images/sealion.jpg";
 
 // start the game
+
+
+
 	window.onload = function () {
 
-		document.getElementById("lives").innerHTML = guesses;	
 
-		document.getElementById("gameStart").onclick = function() {
+		document.getElementById("lives").innerHTML = guesses;
+		document.getElementById("losses").innerHTML = losses;
+		document.getElementById("timesWon").innerHTML = wins;	
 
+		document.getElementById("secretWord").onclick = function restartGame() {
+
+				secretWord.length = 0;
+				guessedLettersDisplay.length = 0;
+				guessedLetters.length = 0;
+				wordArray.length = 0;
 
 				var randomWord = word[Math.floor(Math.random() * word.length)];
 				console.log(randomWord);
@@ -27,23 +49,19 @@
 
 					if (arrLetter.indexOf(randomWord.charAt(i)) !== -1) {
 						console.log(randomWord.charAt(i))
-						wordArray.push(" " + randomWord.charAt(i) + " ");
-						checkWord.push(randomWord.charAt(i));
-						// var correctLetter = document.createTextNode("__ ");
-						// document.querySelector("#secretWord").appendChild(correctLetter);
-						secretWord.push(" __ ");
+						wordArray.push(" " + randomWord.charAt(i) + " "); 	//pushes letters with spaces into array to exchange with placeholder at right guess
+						checkWord.push(randomWord.charAt(i));				//pushes letters into array to compare with userGuess
+						secretWord.push(" __ ");							//pushes placeholder into array for display
 					}
 
 					else {
-						wordArray.push(randomWord.charAt(i));
-						secretWord.push('\u00A0\u00A0\u00A0');
-						checkWord.push(randomWord.charAt(i));
-						// var notLetter = document.createTextNode('\u00A0\u00A0\u00A0');
-						// document.querySelector("#secretWord").appendChild(notLetter);
+						wordArray.push('\u00A0\u00A0\u00A0');				//pushes space into array	
+						secretWord.push('\u00A0\u00A0\u00A0');				//pushes spaces into array for display
+						checkWord.push(randomWord.charAt(i));				//pushes space into array
 					}
 				} //closes for loop
 
-				document.getElementById('secretWord').innerHTML = secretWord.join("");
+				document.getElementById('secretWord').innerHTML = secretWord.join("");  //displays secret word where user clicked
 
 									console.log(secretWord);
 									console.log(wordArray);
@@ -53,37 +71,70 @@
 				var userGuess = event.key = String.fromCharCode(event.keyCode).toLowerCase();
 				console.log(userGuess);
 
-					if (checkWord.indexOf(userGuess) !== -1) {
 
-							for (var i = 0; i < randomWord.length; i++){
-
-					// if (guessedLetters.indexOf(userGuess) !== -1) {
-						// alert("You have already used this letter!");
-					// }				
-
-							 		if (userGuess === randomWord.charAt(i)) {
-									secretWord[i] = wordArray [i];
-									guessedLetters.push(userGuess);
-									document.getElementById("usedLetters").innerHTML = guessedLetters;
-								}
-							} //closes second loop
+	if (arrLetter.indexOf(userGuess) !== -1) {
 	
 
-					} // closes if statement
-					else if (guesses === 0) {
-						
-					}
-					else {
-						guesses--;
-						document.getElementById("lives").innerHTML = guesses;
-					}
+
+					if (guessedLetters.indexOf(userGuess) === -1) {				//checks if user has guessed the letter before
+				
+							guessedLettersDisplay.push(" " + userGuess + " ");	 //pushes guessed Letter into Array to display
+							guessedLetters.push(userGuess);
+
+								if (guesses === 0) {
+									losses++;
+									document.getElementById("losses").innerHTML = losses;
+									// document.getElementById("animal").src = "../images/tiger.jpg";
+									restartGame();
+
+								}
+
+								else if (secretWord.toString() === wordArray.toString()) {
+									wins++;
+									document.getElementById("timesWon").innerHTML = wins;
+									restartGame();
+								}
+
+								else if (checkWord.indexOf(userGuess) !== -1) {
+
+										for (var i = 0; i < randomWord.length; i++){
+
+								// if (guessedLetters.indexOf(userGuess) !== -1) {
+									// alert("You have already used this letter!");
+								// }				
+
+										 		if (userGuess === randomWord.charAt(i)) {
+												secretWord[i] = wordArray [i];				//swaps underscore with correct letter
+												// guessedLetters.push(userGuess);				
+												document.getElementById("usedLetters").innerHTML = guessedLettersDisplay.join("");
+											}
+										} //closes second loop
+				
+
+								} // closes if statement
+
+								else {
+									guesses--;
+									document.getElementById("lives").innerHTML = guesses;
+									// guessedLetters.push(userGuess);
+									document.getElementById("usedLetters").innerHTML = guessedLettersDisplay.join("");						
+								}
 				// } //closes first for loop
+					}
 
+					else {
+						alert("You have already used this letter!");
+					}
+				
 				document.getElementById('secretWord').innerHTML = secretWord.join("");
-
+	} //closes if statement that checks for valid user input
+					
+	else {
+		alert("Please choose a letter.");
+	}
 			} // closes onkeyup function
 			
-		}; //closes function gameStart
+		} //closes function gameStart
 
 
 	}   // closes onload function

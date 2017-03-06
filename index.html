@@ -8,25 +8,41 @@
 </head>
 <body>
 
-<div class="main-section">
-<h1>Animals of the World Hangman Game</h1>
 
-<div class="winLooseBanner"></div>
+<div class="banner">
+	<div id="header">
+		<h1>Animals of the World</h1> 
+		<h1>Hangman Game</h1>
+		<p>Win the game to reveal the picture of the animal and listen up!</p>
 
-<div id="gameStart">Click here to begin the game!!!</div>
-
-<div id="secretWord"></div>
-
-
-<h2>Wins: <div class="timesWon"></div></h2>
-
-<h2>Guesses remaining: <div id="lives"></div></h2>
-
-<h2>Letters used: <div id="usedLetters"></div></h2>
-
+	</div>
 </div>
+
+<div class="main-section">
+	<div id="picandsong">
+	<img id="animal" src="assets/images/questionmark.jpg" style="width: 200px; height: 200px;">
+	</div>
+
+	<div class="winLooseBanner"></div>
+
+
+	<div id="secretWord">Click here to begin the game!!!</div>
+
+
+	<div id="statistics">
+		<h2>Wins: <span id="timesWon"></span></h2>
+
+		<h2>Losses: <span id="losses"></span></h2>
+
+		<h2>Guesses remaining: <span id="lives"></span></h2>
+
+		<h2>Letters used: <span id="usedLetters"></span></h2>
+	</div>
+
+</div> <!-- closes main-section -->
 
 
 <script type="text/javascript" src="assets/javascript/game.js"></script>
+
 </body>
 </html>
