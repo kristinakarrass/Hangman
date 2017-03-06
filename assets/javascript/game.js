@@ -1,9 +1,10 @@
 	// assign variables
 
 	var word = ["elephant", "beluga whale", "hippopotamus","grey wolf", "tiger", "kookaburra", "lion", "raccoon", "penguin", "sea lion"];
-
+	var audio = ["assets/audio/elephant.mp3", "assets/audio/beluga.mp3", "assets/audio/hippo.mp3", "assets/audio/greywolf.mp3", "assets/audio/tiger.mp3", "assets/audio/kookaburra.mp3", "assets/audio/lion.mp3", "assets/audio/raccoon.mp3", "assets/audio/penguin.mp3", "assets/audio/sealion.mp3"]
+	var imgSrc = ["assets/images/elephant.jpg", "assets/images/beluga.jpg", "assets/images/hippo.jpg", "assets/images/greywolf.jpg", "assets/images/tiger.jpg", "assets/images/kookaburra.jpg", "assets/images/lion.jpg", "assets/images/raccoon.jpg", "assets/images/penguin.jpg", "assets/images/sealion.jpg"];
+	var link = ["https://en.wikipedia.org/wiki/Elephant", "https://en.wikipedia.org/wiki/Beluga_whale", "https://en.wikipedia.org/wiki/Hippopotamus", "https://en.wikipedia.org/wiki/Gray_wolf", "https://en.wikipedia.org/wiki/Tiger", "https://en.wikipedia.org/wiki/Kookaburra", "https://en.wikipedia.org/wiki/Lion", "https://en.wikipedia.org/wiki/Raccoon", "https://en.wikipedia.org/wiki/Penguin", "https://en.wikipedia.org/wiki/Sea_lion"];
 	var arrLetter = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
-
 	var guesses = 10;
 	var randomWord, userInput;
 	var secretWord = [];
@@ -30,6 +31,9 @@
 
 	window.onload = function () {
 
+		function playAudio() {
+				animalSound.play();
+		}
 
 		document.getElementById("lives").innerHTML = guesses;
 		document.getElementById("losses").innerHTML = losses;
@@ -37,12 +41,23 @@
 
 		document.getElementById("secretWord").onclick = function restartGame() {
 
-				secretWord.length = 0;
-				guessedLettersDisplay.length = 0;
-				guessedLetters.length = 0;
+				var guesses = 10;
+
+				secretWord.length = 0; //empties word arrays for new game
 				wordArray.length = 0;
 
-				var randomWord = word[Math.floor(Math.random() * word.length)];
+				guessedLettersDisplay.length = 0; //empties guessed letters array for new game
+				guessedLetters.length = 0;
+				
+				document.getElementById("usedLetters").innerHTML = guessedLettersDisplay;
+				document.getElementById("lives").innerHTML = guesses;
+
+
+				var indexNumber = Math.floor(Math.random() * 10);	//produces random number to allign word, image and sound
+				var image = imgSrc[indexNumber];					//image to be displayed
+				var randomWord = word[indexNumber];					//random word to be guessed
+				var animalSound = audio[indexNumber];				//animal sound
+				var webAddress = link[indexNumber];					//link to wikipedia	
 				console.log(randomWord);
 
 				for (var i = 0; i < randomWord.length; i++) {
@@ -72,7 +87,7 @@
 				console.log(userGuess);
 
 
-	if (arrLetter.indexOf(userGuess) !== -1) {
+	if (arrLetter.indexOf(userGuess) !== -1) {  // checks if input is valid letter
 	
 
 
@@ -84,13 +99,15 @@
 								if (guesses === 0) {
 									losses++;
 									document.getElementById("losses").innerHTML = losses;
-									// document.getElementById("animal").src = "../images/tiger.jpg";
 									restartGame();
-
 								}
 
 								else if (secretWord.toString() === wordArray.toString()) {
 									wins++;
+									document.getElementById("animal").src = image;
+									document.getElementById("animalSound").src = animalSound;
+									document.getElementById("link").innerHTML = webAddress;
+									playAudio(animalSound);
 									document.getElementById("timesWon").innerHTML = wins;
 									restartGame();
 								}
@@ -99,19 +116,14 @@
 
 										for (var i = 0; i < randomWord.length; i++){
 
-								// if (guessedLetters.indexOf(userGuess) !== -1) {
-									// alert("You have already used this letter!");
-								// }				
-
 										 		if (userGuess === randomWord.charAt(i)) {
 												secretWord[i] = wordArray [i];				//swaps underscore with correct letter
-												// guessedLetters.push(userGuess);				
 												document.getElementById("usedLetters").innerHTML = guessedLettersDisplay.join("");
 											}
-										} //closes second loop
+										} //closes loop
 				
 
-								} // closes if statement
+								} // closes else if statement
 
 								else {
 									guesses--;

@@ -5,6 +5,16 @@ body {
 	position: relative;
 }
 
+a {
+	padding: 20px;
+	text-decoration: none;
+	position: relative;
+	bottom: 20px;
+	left: 20%;
+	right: 20%;
+	color: darkgrey;
+}
+
 p {
 	padding: 20px;
 }
