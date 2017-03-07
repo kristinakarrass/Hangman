@@ -8,42 +8,50 @@
 </head>
 <body>
 
-
-<div class="banner">
 	<div id="header">
-		<h1>Animals of the World</h1> 
-		<h1>Hangman Game</h1>
-		<p>Win the game to reveal the picture of the animal and listen up!</p>
+		<h1>ANIMALS OF THE WORLD</h1>
+		<h2>Hangman Game</h2>
+	</div>
+
+<div class="container">
+
+	<div class="banner">
+
+		<div id="text">
+			<p>Win the game to reveal the picture of the animal and listen up!</p>
+			<p>Check out Wikipedia to learn more awesome animal facts.</p>
+		</div>
+
+		<div id="statistics">
+			<h3>Wins: <span id="timesWon"></span></h3>
+
+			<h3>Losses: <span id="losses"></span></h3>
+
+			<h3>Guesses remaining: <span id="lives"></span></h3>
+
+			<h3>Letters used: <span id="usedLetters"></span></h3>
+		</div>
 
 	</div>
+
+	<div class="main-section">
+		<div id="picandsong">
+		<img id="animal" src="assets/images/questionmark.jpg" style="width: 200px; height: 200px;">
+		<a href="#" id="link" target="_blank"><span><img id="wiki" src="assets/images/wikipedia.png" alt="Wikipedia_link"></span></a>
+		<audio id="animalSound"></audio>
+		</div>
+
+		<div class="winLooseBanner"></div>
+
+
+		<div id="secretWord">Click here to start!!!</div>
+
+
+
+
+	</div> <!-- closes main-section -->
+
 </div>
-
-<div class="main-section">
-	<div id="picandsong">
-	<img id="animal" src="assets/images/questionmark.jpg" style="width: 200px; height: 200px;">
-	<a href="#" id="link">For more information visit...</a>
-	<audio id="animalSound"></audio>
-	</div>
-
-	<div class="winLooseBanner"></div>
-
-
-	<div id="secretWord">Click here to begin the game!!!</div>
-
-
-	<div id="statistics">
-		<h2>Wins: <span id="timesWon"></span></h2>
-
-		<h2>Losses: <span id="losses"></span></h2>
-
-		<h2>Guesses remaining: <span id="lives"></span></h2>
-
-		<h2>Letters used: <span id="usedLetters"></span></h2>
-	</div>
-
-</div> <!-- closes main-section -->
-
-
 <script type="text/javascript" src="assets/javascript/game.js"></script>
 
 </body>
