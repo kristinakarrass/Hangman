@@ -34,6 +34,7 @@
 				guesses = 10;
 				secretWord.length = 0; //empties word arrays for new game
 				wordArray.length = 0;
+				checkWord.length = 0;
 				guessedLettersDisplay.length = 0; //empties guessed letters array for new game
 				guessedLetters.length = 0;
 				pauseAudio();
@@ -55,12 +56,15 @@
 					if (arrLetter.indexOf(randomWord.charAt(i)) !== -1) {
 						wordArray.push(" " + randomWord.charAt(i) + " "); 	//pushes letters with spaces into array to exchange with placeholder at right guess
 						secretWord.push(" __ ");							//pushes placeholder into array for display
+						checkWord.push(randomWord.charAt(i));
 					}
 
 					else {
 						wordArray.push('\u00A0\u00A0\u00A0');				//pushes space into array	
 						secretWord.push('\u00A0\u00A0\u00A0');				//pushes spaces into array for display
+						checkWord.push(randomWord.charAt(i));
 					}
+
 				} //closes for loop
 
 				document.getElementById('secretWord').innerHTML = secretWord.join("");  //displays secret word where user clicked
@@ -84,7 +88,7 @@
 							guessedLetters.push(userGuess);
 
 
-								if (randomWord.indexOf(userGuess) !== -1) {
+								if (checkWord.indexOf(userGuess) !== -1) {
 
 										for (var i = 0; i < randomWord.length; i++){
 
@@ -96,8 +100,6 @@
 				
 
 								} // closes else if statement
-
-
 
 
 								else {
@@ -115,11 +117,12 @@
 									playAudio(animalSound);
 									document.getElementById("timesWon").innerHTML = wins;
 									// restartGame();
-								}		
-								else if (guesses === 0) { // change this to before the loop starts!!!
+								}	
+
+								else if (guesses === 0) { 
 									losses++;
 									document.getElementById("losses").innerHTML = losses;
-									// restartGame();
+									restartGame();
 								}			
 							}
 
