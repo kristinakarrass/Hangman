@@ -83,7 +83,7 @@
 
 
 					if (guessedLetters.indexOf(userGuess) === -1) {				//checks if user has guessed the letter before
-				console.log(guessedLetters, userGuess);
+				            console.log(guessedLetters, userGuess);
 							guessedLettersDisplay.push(" " + userGuess + " ");	 //pushes guessed Letter into Array to display
 							guessedLetters.push(userGuess);
 
@@ -96,6 +96,8 @@
 												secretWord[i] = wordArray [i];				//swaps underscore with correct letter
 												document.getElementById("usedLetters").innerHTML = guessedLettersDisplay.join("");
 											}
+				document.getElementById('secretWord').innerHTML = secretWord.join("");  // updates secretWord with guessed letters
+
 										} //closes loop
 				
 
@@ -105,7 +107,6 @@
 								else {
 									guesses--;
 									document.getElementById("lives").innerHTML = guesses;
-									// guessedLetters.push(userGuess);
 									document.getElementById("usedLetters").innerHTML = guessedLettersDisplay.join("");						
 								}
 	
@@ -116,7 +117,7 @@
 									document.getElementById("link").href = webAddress;
 									playAudio(animalSound);
 									document.getElementById("timesWon").innerHTML = wins;
-									// restartGame();
+									setTimeout(restartGame, 7000);
 								}	
 
 								else if (guesses === 0) { 
@@ -130,7 +131,7 @@
 						alert("You have already used this letter!");
 					}
 				
-				document.getElementById('secretWord').innerHTML = secretWord.join("");  // updates secretWord with guesses letters
+				// document.getElementById('secretWord').innerHTML = secretWord.join("");  // updates secretWord with guessed letters
 	} //closes if statement that checks for valid user input
 					
 	else {

@@ -8,7 +8,9 @@ html {
 }
 
 body {
-	background-image: url("../images/background2.jpg");
+	background-image: url("../images/background.jpg");
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
 	font-family: cursive;
 	margin: 0;
 	padding: 0;
@@ -40,49 +42,14 @@ p {
 	padding: 20px;
 }
 
-#header {
+.page-header {
+	margin: 0;
+	border-bottom: 0;
 	font-family: "Faltura Animals";
-	position: relative;
-	top: 20px;
-	left: 40px;
-	text-align: center;
-	margin-bottom: 50px;
-}
-#header h1 {
-	font-size: 80px;
 }
 
-#header h2 {
-	font-size: 48px;
-}
-
-#animal {
-	margin: 0 25%;
-}
-
-#wiki {
-	margin: 0 25%;
-}
-
-.banner {
-	background-color: #ffffff;
-	border: 2px solid #dddddd;
-	font-size: 24px;
-	width: 100%;
-	max-width: 400px;
-	height: 500px;
-	margin: 0 auto;
-	float: left;
-	
-}
-.main-section {
-	width: 100%;
-	max-width: 470px;
-	background-color: #ffffff;
-	border: 2px solid #dddddd;
-	margin: 0 auto;
-	padding: 40px;
-	float: right;
+.page-header h1 {
+	font-size: 60px;
 }
 
 #secretWord {
@@ -90,8 +57,6 @@ p {
 	background-color: lightgrey;
 	text-align: center;
 }
-
-
 
 h3 {
 	padding: 20px;
